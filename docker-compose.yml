@@ -1,0 +1,24 @@
+lnmp:
+  build: .
+  # 端口映射
+  ports:
+    - "80:80"
+    - "443:443"
+    - "2222:22"
+    - "3306:3306"
+    - "6379:6379"
+  # 挂载本地目录作为数据卷
+  volumes:
+    # nginx 配置文件夹
+    - ./conf/nginx/:/usr/local/nginx/conf/:rw
+    # mysql 配置文件夹
+    - ./conf/mysql/my.cnf:/etc/my.cnf:ro
+    - ./conf/mysql/var:/usr/local/mysql/var/:rw
+    # php 配置文件夹
+    - ./conf/php/:/usr/local/php/etc/:rw
+    # redis 配置文件夹
+    - ./conf/redis/etc/:/usr/local/redis/etc/:rw
+    # 项目目录
+    - ./home:/home/:rw
+  # 容器启动后不退出运行
+  tty: true
